@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,700;0,900;1,400&display=swap');
+
+/*Base*/
+html,body {
+  font-size: 17px;
+  font-family: 'Roboto';
+}
+
+.container{
+  width: 290px;
+  margin: 0 auto;
+}
+ 
+.MuiAutocomplete-root .MuiFormLabel-root{
+  font-weight: 400;
+  color: #FECD00 !important;
+}
+
+.MuiAutocomplete-root .MuiAutocomplete-endAdornment{
+  display: none;
+}
+
+.MuiAutocomplete-root .MuiInput-underline:after{
+  border-bottom: 2px solid #FECD00 !important;
+}
+.MuiAutocomplete-root.autocompleteSucces .MuiInput-underline:before{
+  border-bottom: 2px solid #FECD00 !important;
+}
+
+
+.MuiAutocomplete-root .MuiInput-underline:before{
+  border-bottom: 2px solid #cecece !important;
+}
+
+.MuiAutocomplete-inputRoot[class*="MuiInput-root"] .MuiAutocomplete-input:first-child {
+  padding: 8px 0;
+}
+label + .MuiInput-formControl {
+  margin-top: 17px;
+}
+
+.MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete-inputRoot {
+  padding-right: 20px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
