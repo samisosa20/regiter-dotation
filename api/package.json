@@ -1,0 +1,56 @@
+{
+  "name": "backend-register-dotation",
+  "version": "1.0.0",
+  "author": {
+    "name": "Sammy Guttman",
+    "url": "https://github.com/samisosa20"
+  },
+  "scripts": {
+    "start": "npm run prod",
+    "build": "npm-run-all clean transpile",
+    "server": "node ./dist/app.js",
+    "prod": "npm-run-all build server",
+    "transpile": "babel ./src --out-dir dist",
+    "clean": "rimraf dist",
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "async": "^3.2.0",
+    "axios": "^0.21.4",
+    "body-parser": "^1.5.1",
+    "crypto": "^1.0.1",
+    "dotenv": "^9.0.2",
+    "express": "^4.7.1",
+    "express-async-handler": "^1.1.4",
+    "express-validator": "^6.11.1",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^2.1.2",
+    "mysql": "^2.18.1",
+    "mysql-async-simple": "^1.0.3",
+    "npm-run-all": "^4.1.5",
+    "regenerator-runtime": "^0.13.7",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "nodemonConfig": {
+    "exec": "npm run prod",
+    "watch": [
+      "src/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}

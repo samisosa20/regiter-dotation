@@ -1,12 +1,11 @@
-import { useDispatch } from "react-redux";
-import {people, ADD_ASSIGNMENT, defaultAssignments} from "./People"
+import { ADD_DATA, INIT_DATA, defaultAssignments } from "./People";
 
 const useActions = () => {
-    return {
-        people,
-        ADD_ASSIGNMENT,
-        defaultAssignments
-    }
-}
+  return {
+    ADD_DATA,
+    INIT_DATA,
+    defaultAssignments,
+  };
+};
 
 export default useActions;

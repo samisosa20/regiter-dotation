@@ -3,24 +3,37 @@ import { DataGrid } from "@material-ui/data-grid";
 import PropTypes from "prop-types";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 200 },
+  { field: "serial", headerName: "Serial", width: 150 },
+  {
+    field: "owner",
+    headerName: "Owner",
+    width: 150,
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    width: 150,
+  },
   {
     field: "name",
-    headerName: "Full Name",
-    width: 450,
-    editable: true,
-  }
-];
-
-const rows = [
-  { id: 1, name: "Jaime" },
-  { id: 2, name: "Cersei" },
-  { id: 3, name: "Jaime" },
-  { id: 4, name: "Arya" },
-  { id: 5, name: "Daenerys" },
-  { id: 7, name: "Ferrara" },
-  { id: 8, name: "Rossini" },
-  { id: 9, name: "Harvey" },
+    headerName: "name",
+    width: 150,
+  },
+  {
+    field: "system",
+    headerName: "system",
+    width: 150,
+  },
+  {
+    field: "type",
+    headerName: "Type",
+    width: 150,
+  },
+  {
+    field: "date",
+    headerName: "Date",
+    width: 150,
+  },
 ];
 
 const Table = (props) => {
@@ -43,7 +56,7 @@ Table.propTypes = {
 };
 
 Table.defaultProps = {
-  rows: rows,
+  rows: [],
 };
 
 export default Table;

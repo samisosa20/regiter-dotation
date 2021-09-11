@@ -1,15 +1,23 @@
+// Provider
+import useProviders from "../../../api/providers"
 import useActions from "../../../api/actions";
 
-const {ADD_ASSIGNMENT, defaultAssignments } = useActions()
-const reducer = (state = defaultAssignments, action) => {
-  console.log(action)
+const {INIT_DATA, ADD_DATA, defaultAssignments } = useActions()
+const {useEquipment} = useProviders();
+const {listAssignments} = useEquipment();
+const reducer = async (state = defaultAssignments, action) => {
   switch (action.type) {
-    case ADD_ASSIGNMENT: {
-      const newAssignment = [...state.assignment]
-      newAssignment.push({id: action.id, name: action.name})
+    case INIT_DATA: {
+      console.log(action)
       return {
         ...state,
-        assignment: newAssignment,
+        assignment: action.data,
+      };
+    }
+    case ADD_DATA: {
+      return {
+        ...state,
+        assignment: action.data,
       };
     }
     default:
