@@ -1,6 +1,8 @@
+// Packages
+import axios from "axios";
+
 // Controlles
 import equipments from "../controllers/equipment";
-import axios from "axios";
 
 const equipment = (app) => {
   app.get("/equipments/id", function (req, res) {
@@ -12,6 +14,18 @@ const equipment = (app) => {
   app.get("/equipments", async (req, res) => {
     try {
         const result = await equipments("LIST", req);
+        res
+            .status(result.status)
+            .json({ result: result.results, message: result.message });
+    } catch (error) {
+      res
+        .status(400)
+        .json({ message: { color: "danger", message: "Error de conexión." } });
+    }
+  });
+  app.post("/equipment", async (req, res) => {
+    try {
+        const result = await equipments("INSERT", req);
         res
             .status(result.status)
             .json({ result: result.results, message: result.message });

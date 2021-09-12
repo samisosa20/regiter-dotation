@@ -1,5 +1,6 @@
 // Packages
 import express from "express"
+import cors from "cors"
 import path from "path";
 import bodyParser from "body-parser";
 import methodOverride from "method-override";
@@ -28,8 +29,9 @@ router.all('*', function(req, res){
 });
 
 // Le indica al sistema que rutas se van ha usar
-app.use(router);
+app.use(cors())
 app.use(express.static(path.join(__dirname, "../public")));
+app.use(router);
 
 
 app.listen(config.port || 3000, function() {

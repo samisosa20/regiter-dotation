@@ -23,6 +23,7 @@ const InputForm = React.forwardRef((props, ref) => {
     errors,
     defaultValue,
     disabled,
+    onChange
   } = props;
   const [typeField, setTypeField] = useState();
 
@@ -46,6 +47,7 @@ const InputForm = React.forwardRef((props, ref) => {
           value={value}
           defaultValue={defaultValue}
           disabled={disabled}
+          onChange={onChange}
         />
         {type === "password" && typeField === "password" ? (
           <AiOutlineEyeInvisible
@@ -90,6 +92,7 @@ InputForm.propTypes = {
   searchMode: PropTypes.bool,
   type: PropTypes.string,
   disabled: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 InputForm.defaultProps = {
@@ -97,6 +100,7 @@ InputForm.defaultProps = {
   searchMode: false,
   type: "text",
   disabled: false,
+  onChange: ()=>{}
 };
 
 export default InputForm;

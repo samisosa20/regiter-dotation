@@ -1,14 +1,10 @@
 // Provider
-import useProviders from "../../../api/providers"
 import useActions from "../../../api/actions";
 
 const {INIT_DATA, ADD_DATA, defaultAssignments } = useActions()
-const {useEquipment} = useProviders();
-const {listAssignments} = useEquipment();
-const reducer = async (state = defaultAssignments, action) => {
+const reducer = (state = defaultAssignments, action) => {
   switch (action.type) {
     case INIT_DATA: {
-      console.log(action)
       return {
         ...state,
         assignment: action.data,
@@ -17,7 +13,25 @@ const reducer = async (state = defaultAssignments, action) => {
     case ADD_DATA: {
       return {
         ...state,
-        assignment: action.data,
+        assignment: action.data.result,
+        status: 200,
+        message: action.data.message.message,
+        colorMessage: action.data.message.color,
+      };
+    }
+    case 'SHOW_ERROR': {
+      return {
+        ...state,
+        status: action.data.status,
+        message: action.data.data.message.message,
+        colorMessage: action.data.data.message.color,
+      };
+    }
+    case 'HIDDEN_MESSAGE': {
+      return {
+        ...state,
+        status: 0,
+        message: '',
       };
     }
     default:
