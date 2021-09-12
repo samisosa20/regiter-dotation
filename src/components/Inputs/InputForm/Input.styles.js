@@ -25,10 +25,12 @@ ${(props) => {
 export const StyledInput = styled.input.attrs({
   className: "StyledInput",
 })`
-  ${tw` border-2 py-2 relative bg-white focus:outline-none bg-no-repeat px-6 text-black`}
+  ${tw` border-2 py-2 relative bg-white focus:outline-none bg-no-repeat px-6 text-black w-11/12`}
   ::placeholder {
-    color: #e2e2e2;
     text-transform: uppercase;
+  }
+  :-webkit-autofill {
+    -webkit-text-fill-color: black !important;
   }
 `;
 

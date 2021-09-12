@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
+// Styles
+import { StyledHome, ContainerInputs, Message, Loader } from "./home.style";
+
 // Components
 import useComponents from "../../../components";
 
@@ -12,7 +15,7 @@ const Home = (props) => {
   const { Typography, useInputs, Button, Table } = useComponents();
   const { useEquipment } = useProviders();
   const { listAssignments, addAssignments } = useEquipment();
-  const { InputForm } = useInputs();
+  const { InputForm, CustomSelect } = useInputs();
   const {
     assignment,
     initData,
@@ -21,7 +24,9 @@ const Home = (props) => {
     status,
     message,
     hiddenMessage,
-    colorMessage
+    colorMessage,
+    show,
+    loader,
   } = props;
   const [form, setForm] = useState({
     serial: "",
@@ -32,33 +37,40 @@ const Home = (props) => {
     type: "",
   });
   useEffect(async () => {
-    await listAssignments().then((r) => initData(r.data.result));
+    loader();
+    await listAssignments().then((r) => {
+      loader();
+      initData(r.data.result);
+    });
   }, []);
   const handleChange = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.value ? "type" : e.target.name]: e.value ? e.value : e.target.value,
     });
   };
   const handleSubmit = () => {
+    loader();
     addAssignments(form)
       .then((r) => {
+        loader();
         addData(r.data);
         setTimeout(() => hiddenMessage(), 1500);
       })
       .catch((err) => {
+        loader();
         showMessage(err.response);
         setTimeout(() => hiddenMessage(), 1500);
       });
   };
   return (
-    <div className="px-4 pt-8">
+    <StyledHome>
       <Typography variant="h1">Asigaciones de dotación</Typography>
       <Typography variant="p">
         Asigna los dispositivos al personal, escribe el nombre de la persona y
         el serial del equipo para ser asignado
       </Typography>
-      <div className="flex flex-col space-y-3 lg:grid grid-cols-3 my-6 px-4">
+      <ContainerInputs>
         <InputForm
           id="numberSerial"
           name="serial"
@@ -91,27 +103,39 @@ const Home = (props) => {
           placeholder="Sistema del equipo"
           onChange={handleChange}
         />
-        <InputForm
+        <CustomSelect
           id="type"
           name="type"
+          className="w-11/12"
           placeholder="Tipo"
           onChange={handleChange}
+          options={[
+            { label: "celular", value: "celular" },
+            { label: "laptop", value: "laptop" },
+            { label: "impresora", value: "impresora" },
+            { label: "teclado", value: "teclado" },
+            { label: "mouse", value: "mouse" },
+          ]}
         />
         <Button
-          className="rounded"
+          className="rounded col-start-3 w-11/12"
           label="Asignar"
+          disabled={Object.values(form).filter((e) => e !== "").length !== 6}
           onClick={() => handleSubmit()}
         />
-      </div>
+      </ContainerInputs>
       <Table rows={assignment} />
-      <div
-        className={`${colorMessage} ${
-          status === 0 ? "hidden" : null
-        } w-max py-2 px-4 absolute bottom-2 left-0 right-0 mx-auto rounded-lg font-semibold`}
-      >
+      <Message status={status} className={colorMessage}>
         {message}
-      </div>
-    </div>
+      </Message>
+      <Loader show={show}>
+        <div className="bg-white flex space-x-2 p-5 rounded-full justify-center items-center w-max m-auto absolute left-0 right-0 top-1/2">
+          <div className="bg-blue-600 p-2  w-4 h-4 rounded-full animate-bounce blue-circle"></div>
+          <div className="bg-green-600 p-2 w-4 h-4 rounded-full animate-bounce green-circle"></div>
+          <div className="bg-red-600 p-2  w-4 h-4 rounded-full animate-bounce red-circle"></div>
+        </div>
+      </Loader>
+    </StyledHome>
   );
 };
 
@@ -121,6 +145,7 @@ const mapStateToProps = (state) => {
     status: state.reducer.status,
     message: state.reducer.message,
     colorMessage: state.reducer.colorMessage,
+    show: state.reducer.show,
   };
 };
 
@@ -147,6 +172,11 @@ const mapDispatchToProps = (dispatch) => {
     hiddenMessage() {
       dispatch({
         type: "HIDDEN_MESSAGE",
+      });
+    },
+    loader() {
+      dispatch({
+        type: "LOADER",
       });
     },
   };

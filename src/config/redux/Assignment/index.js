@@ -34,6 +34,12 @@ const reducer = (state = defaultAssignments, action) => {
         message: '',
       };
     }
+    case 'LOADER': {
+      return {
+        ...state,
+        show: !state.show,
+      };
+    }
     default:
       return state;
   }
