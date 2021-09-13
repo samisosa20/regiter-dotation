@@ -33,6 +33,12 @@ despues abres otra terminal y corres el front en la raiz del proyecto
 
 `npm start`
 
+## Correr test
+
+Una vez que tengas instalado las dependencias y la base de datos lista ejecuta el siguente comando dentro de la siguiente ruta `/regiter-dotation/api`
+
+`npm run test`
+
 ## Autor
 
 [Sammy Guttman L](https://github.com/samisosa20)

@@ -2,12 +2,12 @@
 import { Router } from "express";
 
 // Routes
-import test from "./routes/test";
+import about from "./routes/about";
 import equipment from "./routes/equipment";
 
 export default () => {
   const app = Router();
-  test(app);
+  about(app);
   equipment(app);
 
   return app;

@@ -1,4 +1,4 @@
-const test = (app) =>{
+const about = (app) =>{
 // Home page route
 app.get('', function(req, res) {
   res.send('Hello World!, this is my first API');
@@ -11,4 +11,4 @@ app.get('/about', function(req, res) {
 return app
 }
 
-export default test;
+export default about;

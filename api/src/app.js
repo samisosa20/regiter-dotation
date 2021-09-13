@@ -34,6 +34,8 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(router);
 
 
-app.listen(config.port || 3000, function() {
+const server = app.listen(config.port || 3000, function() {
   console.log(`Node server running on http://localhost:${config.port || 3000}`);
 });
+
+module.exports = {app, server};
